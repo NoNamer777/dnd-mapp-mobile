@@ -1,4 +1,4 @@
-package com.nonamer777.dndmappmobile.ui.viewModels
+package com.nonamer777.dndmappmobile.ui.viewModel
 
 import android.app.Activity
 import android.app.Application
@@ -11,6 +11,7 @@ import com.nonamer777.dndmappmobile.R
 import com.nonamer777.dndmappmobile.model.Spell
 import com.nonamer777.dndmappmobile.repository.SpellRepository
 import com.nonamer777.dndmappmobile.repository.exception.SpellRetrievalException
+import com.nonamer777.dndmappmobile.repository.exception.SpellSaveError
 import com.nonamer777.dndmappmobile.ui.MainActivity
 import kotlinx.coroutines.launch
 
@@ -30,6 +31,16 @@ class SpellViewModel(application: Application): AndroidViewModel(application) {
                 R.string.exception_message_retrieval_error,
                 "Spells"
             )
+
+            Log.e(MainActivity.FIRESTORE_TAG, exception.message ?: message)
+
+            _error.value = message
+        }
+    }
+
+    fun saveSpells() = viewModelScope.launch {
+        try { spellRepo.saveSpells() } catch (exception: SpellSaveError) {
+            val message = "Something went wrong while saving the spells"
 
             Log.e(MainActivity.FIRESTORE_TAG, exception.message ?: message)
 

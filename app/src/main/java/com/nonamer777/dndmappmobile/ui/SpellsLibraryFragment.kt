@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.nonamer777.dndmappmobile.R
 import com.nonamer777.dndmappmobile.databinding.FragmentSpellsLibraryBinding
-import com.nonamer777.dndmappmobile.ui.viewModels.SpellViewModel
+import com.nonamer777.dndmappmobile.ui.viewModel.SpellViewModel
 
 /**
  * A [Fragment] subclass that serves as a library of Spells.
