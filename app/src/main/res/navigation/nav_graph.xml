@@ -4,12 +4,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/firstFragment"
+    app:startDestination="@id/homeFragment"
 >
     <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.nonamer777.dndmappmobile.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first"
-    />
+        android:id="@+id/homeFragment"
+        android:name="com.nonamer777.dndmappmobile.ui.HomeFragment"
+        android:label="@string/home_fragment_label"
+        tools:layout="@layout/fragment_home"
+    >
+        <action
+            android:id="@+id/action_homeFragment_to_spellsLibraryFragment"
+            app:destination="@id/spellsLibraryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_charactersOverviewFragment"
+            app:destination="@id/charactersOverviewFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_characterCreatorFragment"
+            app:destination="@id/baseCharacterOptionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/spellsLibraryFragment"
+        android:name="com.nonamer777.dndmappmobile.ui.SpellsLibraryFragment"
+        android:label="@string/spells_library_fragment_label"
+        tools:layout="@layout/fragment_spells_library" />
+    <fragment
+        android:id="@+id/charactersOverviewFragment"
+        android:name="com.nonamer777.dndmappmobile.ui.CharactersOverviewFragment"
+        android:label="@string/characters_overview_fragment_label">
+        <action
+            android:id="@+id/action_charactersOverviewFragment_to_characterCreatorFragment"
+            app:destination="@id/baseCharacterOptionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/baseCharacterOptionsFragment"
+        android:name="com.nonamer777.dndmappmobile.ui.BaseCharacterOptionsFragment"
+        android:label="@string/character_creator_fragment_label">
+        <action
+            android:id="@+id/action_characterCreatorFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

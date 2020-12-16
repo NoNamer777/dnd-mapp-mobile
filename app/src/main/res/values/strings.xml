@@ -1,6 +1,23 @@
 <resources>
     <string name="app_name">DnD Mapp</string>
 
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
+    <string name="exception_message_retrieval_error">
+        Something went wrong while retrieving the %1$s
+    </string>
+
+    <string name="home_fragment_label">Home Fragment</string>
+    <string name="title_home">Home</string>
+    <string name="btn_text_characters_overview">Characters Overview</string>
+    <string name="btn_text_create_character">Create Character</string>
+    <string name="btn_text_spells_dictionary">Spells Library</string>
+
+    <string name="spells_library_fragment_label">Spells Library Fragment</string>
+    <string name="title_spells_library">Spells Library</string>
+
+    <string name="characters_overview_fragment_label">Characters Overview Fragment</string>
+    <string name="title_characters_overview">Characters Overview</string>
+
+    <string name="character_creator_fragment_label">Character Creator Fragment</string>
+    <string name="title_character_creator">Character Creator</string>
+
 </resources>
