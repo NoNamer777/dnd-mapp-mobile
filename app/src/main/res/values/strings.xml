@@ -14,6 +14,14 @@
     <string name="spells_library_fragment_label">Spells Library Fragment</string>
     <string name="title_spells_library">Spells Library</string>
 
+    <string name="label_text_spell_name" />
+    <string name="label_text_spell_level" />
+    <string name="label_text_spell_school" />
+    <string name="label_text_spell_components" />
+    <string name="label_text_spell_duration" />
+    <string name="label_text_spell_casting_time" />
+    <string name="label_text_spell_range" />
+
     <string name="characters_overview_fragment_label">Characters Overview Fragment</string>
     <string name="title_characters_overview">Characters Overview</string>
 
