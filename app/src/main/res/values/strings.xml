@@ -13,6 +13,7 @@
 
     <string name="spells_library_fragment_label">Spells Library Fragment</string>
     <string name="title_spells_library">Spells Library</string>
+    <string name="btn_description_open_spell_filters">open spell filters</string>
 
     <string name="label_text_spell_name" />
     <string name="label_text_spell_level" />
