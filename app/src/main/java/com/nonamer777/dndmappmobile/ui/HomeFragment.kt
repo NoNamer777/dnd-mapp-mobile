@@ -23,7 +23,7 @@ class HomeFragment: Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
-        MainActivity.actionBar?.title = getString(R.string.title_home)
+        MainActivity.actionBar?.title = getString(R.string.app_name)
 
         return binding.root
     }

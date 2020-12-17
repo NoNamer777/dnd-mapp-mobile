@@ -3,17 +3,29 @@ package com.nonamer777.dndmappmobile.model
 data class Spell(
 
     val name: String? = null,
+
     val level: Int? = null,
+
     val schoolOfMagic: String? = null,
+
     val ritual: Boolean? = null,
+
     val castingTime: String? = null,
+
     val range: String? = null,
+
     val components: List<String>? = null,
+
     val materialComponents: List<String>? = null,
+
     val concentration: Boolean? = null,
+
     val duration: String? = null,
-    val description: Map<String, String>? = null,
+
+    val description: Map<String, List<String>>? = null,
+
     val leveledCasting: LeveledCasting? = null,
+
     val upCasting: String? = null
 ) {
 
