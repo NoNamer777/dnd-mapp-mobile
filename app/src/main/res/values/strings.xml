@@ -16,7 +16,7 @@
     <string name="btn_description_open_spell_filters">open spell filters</string>
 
     <string name="label_text_spell_name" />
-    <string name="label_text_spell_level" />
+    <string name="label_text_spell_level">%1$s, %2$s</string>
     <string name="label_text_spell_school" />
     <string name="label_text_spell_components" />
     <string name="label_text_spell_duration" />

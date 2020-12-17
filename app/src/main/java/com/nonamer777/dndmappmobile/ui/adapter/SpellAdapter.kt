@@ -28,10 +28,22 @@ class SpellAdapter(
 
         fun bind(spell: Spell) {
             binding.labelName.text = spell.name
-            binding.labelLevelAndSchool.text = "${spell.levelString()}, ${spell.schoolOfMagic}"
+            binding.labelRange.text = spell.range
+            binding.labelLevelAndSchool.text = context.getString(
+                R.string.label_text_spell_level,
+                spell.levelString(),
+                spell.schoolOfMagic
+            )
 
             var components = ""
-            var durationAndConcentration = ""
+            val castingTimeAndRitual = when (spell.ritual) {
+                true -> "${spell.castingTime} (ritual)"
+                else -> spell.castingTime
+            }
+            val durationAndConcentration = when (spell.concentration!!) {
+                true -> "Concentration, ${spell.duration}"
+                else -> spell.duration
+            }
 
             for (component in spell.components!!) {
                 components += component[0].toUpperCase()
@@ -39,15 +51,8 @@ class SpellAdapter(
                 if (spell.components.last() != component) components += ", "
             }
             binding.labelComponents.text = components
-
-            if (spell.concentration!!) {
-                durationAndConcentration += " Concentration, "
-            }
-            durationAndConcentration += spell.duration
-
             binding.labelDurtionAndConcentration.text = durationAndConcentration
-            binding.labelCatingTime.text = spell.castingTime
-            binding.labelRange.text = spell.range
+            binding.labelCatingTime.text = castingTimeAndRitual
         }
     }
 
