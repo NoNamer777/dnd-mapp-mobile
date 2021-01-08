@@ -1,37 +1,46 @@
 package com.nonamer777.dndmappmobile.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Spell(
 
-    val name: String? = null,
+    @SerializedName("desc")
+    val description: List<String>,
 
-    val level: Int? = null,
+    @SerializedName("higher_level")
+    val higherLevel: List<String>,
 
-    val schoolOfMagic: String? = null,
+    @SerializedName("range")
+    val range: String,
 
-    val ritual: Boolean? = null,
+    @SerializedName("components")
+    val components: List<String>,
 
-    val castingTime: String? = null,
+    @SerializedName("material")
+    val materialComponents: String,
 
-    val range: String? = null,
+    @SerializedName("ritual")
+    val ritual: Boolean,
 
-    val components: List<String>? = null,
+    @SerializedName("duration")
+    val duration: String,
 
-    val materialComponents: List<String>? = null,
+    @SerializedName("concentration")
+    val concentration: Boolean,
 
-    val concentration: Boolean? = null,
+    @SerializedName("casting_time")
+    val castingTime: String,
 
-    val duration: String? = null,
+    @SerializedName("level")
+    val level: Int,
 
-    val description: Map<String, List<String>>? = null,
+    @SerializedName("attack_type")
+    val attackType: String,
 
-    val leveledCasting: LeveledCasting? = null,
+    @SerializedName("school")
+    val magicSchool: MagicSchool
 
-    val upCasting: String? = null
-) {
-
-    fun canBeCastAtHigherLevel(): Boolean = upCasting != null
-
-    fun scalesWithPlayerLevel(): Boolean = leveledCasting != null
+): CommonModel() {
 
     fun levelString(): String = when (level) {
         0 -> "Cantrip"

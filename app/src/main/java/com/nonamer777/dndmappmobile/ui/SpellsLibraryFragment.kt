@@ -1,7 +1,6 @@
 package com.nonamer777.dndmappmobile.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.nonamer777.dndmappmobile.databinding.FragmentSpellsLibraryBinding
 import com.nonamer777.dndmappmobile.model.Spell
 import com.nonamer777.dndmappmobile.ui.adapter.SpellAdapter
 import com.nonamer777.dndmappmobile.ui.viewModel.SpellViewModel
+import kotlin.properties.Delegates
 
 /**
  * A [Fragment] subclass that serves as a library of Spells.
@@ -27,6 +27,10 @@ class SpellsLibraryFragment: Fragment() {
     private val spells = arrayListOf<Spell>()
 
     private val spellAdapter = SpellAdapter(spells, ::onSpellClick)
+
+    private var levelFilter: Int? = null
+
+    private var magicSchoolFilter: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,17 +54,32 @@ class SpellsLibraryFragment: Fragment() {
             false
         )
 
+        val bottomSheetSpellFiltersFragment = BottomSheetSpellFiltersFragment()
+
+        binding.btnOpenFilterSpells.setOnClickListener {
+            bottomSheetSpellFiltersFragment.show(
+                requireActivity().supportFragmentManager,
+                "SpellFilterFragment"
+            )
+        }
+
         observeRequests()
 
-        spellViewModel.getSpells(requireActivity())
+        spellViewModel.getSpells(requireActivity(), levelFilter, magicSchoolFilter)
     }
 
     private fun observeRequests() {
-        spellViewModel.spells.observe(viewLifecycleOwner, {
-            spells.clear()
-            spells.addAll(it)
+        SpellViewModel.isFetchingSpells.observe(viewLifecycleOwner, {
+            when (it) {
+                false -> {
+                    binding.progressBar.visibility = View.INVISIBLE
 
-            spellAdapter.notifyDataSetChanged()
+                    spells.clear()
+                    spells.addAll(spellViewModel.spells.value!!)
+                    spellAdapter.notifyDataSetChanged()
+                }
+                else -> binding.progressBar.visibility = View.VISIBLE
+            }
         })
     }
 

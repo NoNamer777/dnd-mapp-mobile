@@ -11,11 +11,15 @@ import com.nonamer777.dndmappmobile.R
 import com.nonamer777.dndmappmobile.model.Spell
 import com.nonamer777.dndmappmobile.repository.SpellRepository
 import com.nonamer777.dndmappmobile.repository.exception.SpellRetrievalException
-import com.nonamer777.dndmappmobile.repository.exception.SpellSaveError
 import com.nonamer777.dndmappmobile.ui.MainActivity
 import kotlinx.coroutines.launch
 
 class SpellViewModel(application: Application): AndroidViewModel(application) {
+
+    companion object {
+
+        var isFetchingSpells = MutableLiveData(false)
+    }
 
     private val spellRepo = SpellRepository()
 
@@ -25,24 +29,19 @@ class SpellViewModel(application: Application): AndroidViewModel(application) {
 
     val error: LiveData<String> get() = _error
 
-    fun getSpells(activity: Activity) = viewModelScope.launch {
-        try { spellRepo.getSpells() } catch (exception: SpellRetrievalException) {
+    fun getSpells(activity: Activity, level: Int?, magicSchool: String?) = viewModelScope.launch {
+        try {
+            isFetchingSpells.value = true
+
+            spellRepo.getSpells(level, magicSchool)
+
+        } catch (exception: SpellRetrievalException) {
             val message = activity.getString(
                 R.string.exception_message_retrieval_error,
                 "Spells"
             )
 
-            Log.e(MainActivity.FIRESTORE_TAG, exception.message ?: message)
-
-            _error.value = message
-        }
-    }
-
-    fun saveSpells() = viewModelScope.launch {
-        try { spellRepo.saveSpells() } catch (exception: SpellSaveError) {
-            val message = "Something went wrong while saving the spells"
-
-            Log.e(MainActivity.FIRESTORE_TAG, exception.message ?: message)
+            Log.e(MainActivity.API_TAG, exception.message ?: message)
 
             _error.value = message
         }

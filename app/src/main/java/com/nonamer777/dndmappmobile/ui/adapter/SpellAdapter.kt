@@ -32,7 +32,7 @@ class SpellAdapter(
             binding.labelLevelAndSchool.text = context.getString(
                 R.string.label_text_spell_level,
                 spell.levelString(),
-                spell.schoolOfMagic
+                spell.magicSchool.name
             )
 
             var components = ""
@@ -40,12 +40,12 @@ class SpellAdapter(
                 true -> "${spell.castingTime} (ritual)"
                 else -> spell.castingTime
             }
-            val durationAndConcentration = when (spell.concentration!!) {
+            val durationAndConcentration = when (spell.concentration) {
                 true -> "Concentration, ${spell.duration}"
                 else -> spell.duration
             }
 
-            for (component in spell.components!!) {
+            for (component in spell.components) {
                 components += component[0].toUpperCase()
 
                 if (spell.components.last() != component) components += ", "

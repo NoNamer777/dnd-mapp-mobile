@@ -12,7 +12,7 @@ class MainActivity: AppCompatActivity() {
 
     companion object {
 
-        const val FIRESTORE_TAG = "FIRESTORE"
+        const val API_TAG = "DnD5eApi"
 
         var actionBar: ActionBar? = null
     }
