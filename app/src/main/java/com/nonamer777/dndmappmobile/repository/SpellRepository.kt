@@ -21,8 +21,8 @@ class SpellRepository {
 
     val spells: LiveData<List<Spell>> get() = _spells
 
-    suspend fun getSpells(level: Int?, magicSchool: String?) = try {
-        val result = withTimeout(5_000) { dnD5eApi.getSpells(level, magicSchool) }
+    suspend fun getSpells(level: Int?) = try {
+        val result = dnD5eApi.getSpells(level)
 
         _spells.value = arrayListOf()
 
@@ -38,7 +38,7 @@ class SpellRepository {
     }
 
     private suspend fun getSpell(spellReference: CommonModel) = try {
-        val result = withTimeout(5_000) { dnD5eApi.getSpell(spellReference.index!!) }
+        val result = dnD5eApi.getSpell(spellReference.index!!)
 
         (_spells.value as ArrayList<Spell>).add(result)
 

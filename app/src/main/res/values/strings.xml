@@ -28,5 +28,17 @@
 
     <string name="character_creator_fragment_label">Character Creator Fragment</string>
     <string name="title_character_creator">Character Creator</string>
+    <string name="input_placeholder_spell_search">Find spell...</string>
+    <string name="btn_text_submit_search">find</string>
+
+    <string name="title_spell_filters">Spell Filters</string>
+    <string name="checkbox_text_ritual">Ritual casting</string>
+    <string name="checkbox_text_concentration">Requires concentration</string>
+    <string name="title_spell_components">Spell Components</string>
+    <string name="checkbox_text_components_vocal">Vocal</string>
+    <string name="checkbox_text_components_somatic">Somatic</string>
+    <string name="checkbox_text_components_material">Material</string>
+    <string name="input_placeholder_spell_level">Levels (0..9)</string>
+    <string name="btn_text_apply_filters">Apply Filters</string>
 
 </resources>

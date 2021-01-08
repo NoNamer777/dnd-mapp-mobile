@@ -9,10 +9,7 @@ import retrofit2.http.Query
 interface DnD5eApiService {
 
     @GET("spells")
-    suspend fun getSpells(
-        @Query("level") level: Int?,
-        @Query("school") magicSchool: String?
-    ): SpellReferenceResponse
+    suspend fun getSpells(@Query("level") level: Int?): SpellReferenceResponse
 
     @GET("spells/{index}")
     suspend fun getSpell(@Path("index") spellIndex: String): Spell

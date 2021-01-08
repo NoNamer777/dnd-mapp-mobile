@@ -29,21 +29,19 @@ class SpellViewModel(application: Application): AndroidViewModel(application) {
 
     val error: LiveData<String> get() = _error
 
-    fun getSpells(activity: Activity, level: Int?, magicSchool: String?) = viewModelScope.launch {
+    fun getSpells(activity: Activity, level: Int?) = viewModelScope.launch {
         try {
             isFetchingSpells.value = true
 
-            spellRepo.getSpells(level, magicSchool)
+            spellRepo.getSpells(level)
 
         } catch (exception: SpellRetrievalException) {
-            val message = activity.getString(
+            Log.e(MainActivity.API_TAG, exception.message)
+
+            _error.value = activity.getString(
                 R.string.exception_message_retrieval_error,
                 "Spells"
             )
-
-            Log.e(MainActivity.API_TAG, exception.message ?: message)
-
-            _error.value = message
         }
     }
 }

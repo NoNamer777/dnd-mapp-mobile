@@ -65,18 +65,19 @@ class SpellsLibraryFragment: Fragment() {
 
         observeRequests()
 
-        spellViewModel.getSpells(requireActivity(), levelFilter, magicSchoolFilter)
+        spellViewModel.getSpells(requireActivity(), levelFilter)
     }
 
     private fun observeRequests() {
         SpellViewModel.isFetchingSpells.observe(viewLifecycleOwner, {
+            spells.clear()
+            spellAdapter.notifyDataSetChanged()
+
             when (it) {
                 false -> {
                     binding.progressBar.visibility = View.INVISIBLE
 
-                    spells.clear()
                     spells.addAll(spellViewModel.spells.value!!)
-                    spellAdapter.notifyDataSetChanged()
                 }
                 else -> binding.progressBar.visibility = View.VISIBLE
             }
