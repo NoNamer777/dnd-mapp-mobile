@@ -10,7 +10,6 @@ import com.nonamer777.dndmappmobile.repository.exception.SpellRetrievalException
 import com.nonamer777.dndmappmobile.service.DnD5eApiService
 import com.nonamer777.dndmappmobile.ui.MainActivity
 import com.nonamer777.dndmappmobile.ui.viewModel.SpellViewModel
-import kotlinx.coroutines.withTimeout
 import java.lang.Exception
 
 class SpellRepository {
@@ -26,8 +25,8 @@ class SpellRepository {
 
         _spells.value = arrayListOf()
 
-        for (index in 0..20) {
-            getSpell(result.results[index])
+        for (reference in result.results) {
+            getSpell(reference)
         }
         SpellViewModel.isFetchingSpells.value = false
 

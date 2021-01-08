@@ -7,10 +7,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.activityViewModels
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nonamer777.dndmappmobile.databinding.FragmentBottomSheetSpellFiltersBinding
 import com.nonamer777.dndmappmobile.ui.viewModel.SpellViewModel
+
+const val FILTER_RITUAL = "ritual"
+const val FILTER_CONCENTRATION = "concentration"
+const val FILTER_COMP_VOCAL = "comp_vocal"
+const val FILTER_COMP_SOMATIC = "comp_somatic"
+const val FILTER_COMP_MATERIAL = "comp_material"
 
 /**
  * A [BottomSheetDialogFragment] subclass that contains the logic for the spell filter bottom sheet.
@@ -18,8 +23,6 @@ import com.nonamer777.dndmappmobile.ui.viewModel.SpellViewModel
 class BottomSheetSpellFiltersFragment: BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentBottomSheetSpellFiltersBinding
-
-    private lateinit var dialog: BottomSheetDialog
 
     private val spellViewModel: SpellViewModel by activityViewModels()
 
@@ -44,8 +47,17 @@ class BottomSheetSpellFiltersFragment: BottomSheetDialogFragment() {
 
                 return@setOnClickListener
             }
-
             spellViewModel.getSpells(requireActivity(), level.toIntOrNull())
+
+            val filters = arrayListOf<String>()
+
+            if (binding.checkboxRitual.isChecked) filters.add(FILTER_RITUAL)
+            if (binding.checkboxConcentration.isChecked) filters.add(FILTER_CONCENTRATION)
+            if (binding.checkboxCompVocal.isChecked) filters.add(FILTER_COMP_VOCAL)
+            if (binding.checkboxCompSomatic.isChecked) filters.add(FILTER_COMP_SOMATIC)
+            if (binding.checkboxCompMaterial.isChecked) filters.add(FILTER_COMP_MATERIAL)
+
+            spellViewModel.filters.value = filters
 
             this.dismiss()
         }

@@ -78,6 +78,31 @@ class SpellsLibraryFragment: Fragment() {
                     binding.progressBar.visibility = View.INVISIBLE
 
                     spells.addAll(spellViewModel.spells.value!!)
+
+                    if (spellViewModel.filters.value == null) {
+                        spellAdapter.notifyDataSetChanged()
+
+                        return@observe
+                    }
+
+                    when {
+                        spellViewModel.filters.value!!.indexOf(FILTER_RITUAL) > -1 -> {
+                            spells.removeIf { spell -> !spell.ritual }
+                        }
+                        spellViewModel.filters.value!!.indexOf(FILTER_CONCENTRATION) > -1 -> {
+                            spells.removeIf { spell -> !spell.concentration }
+                        }
+                        spellViewModel.filters.value!!.indexOf(FILTER_COMP_VOCAL) > -1 -> {
+                            spells.removeIf { spell -> spell.components.indexOf("V") <= -1 }
+                        }
+                        spellViewModel.filters.value!!.indexOf(FILTER_COMP_SOMATIC) > -1 -> {
+                            spells.removeIf { spell -> spell.components.indexOf("S") <= -1 }
+                        }
+                        spellViewModel.filters.value!!.indexOf(FILTER_COMP_MATERIAL) > -1 -> {
+                            spells.removeIf { spell -> spell.components.indexOf("M") <= -1 }
+                        }
+                    }
+                    spellAdapter.notifyDataSetChanged()
                 }
                 else -> binding.progressBar.visibility = View.VISIBLE
             }

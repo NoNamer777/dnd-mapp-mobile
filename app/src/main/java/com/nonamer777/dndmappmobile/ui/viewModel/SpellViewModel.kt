@@ -25,6 +25,8 @@ class SpellViewModel(application: Application): AndroidViewModel(application) {
 
     val spells: LiveData<List<Spell>> = spellRepo.spells
 
+    val filters = MutableLiveData<List<String>>()
+
     private val _error = MutableLiveData<String>()
 
     val error: LiveData<String> get() = _error
